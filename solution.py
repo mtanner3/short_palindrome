@@ -11,14 +11,26 @@ def findall(target_char, string):
     return positions
 
 def main(string):
+    pcount = 0
     for idx1 in range(len(string)-3):
         char1 = string[idx1]
-        print "starting with %s at %d" % (char1, idx1)
+        #print "starting with %s at %d" % (char1, idx1)
         others = findall(char1, string[idx1+3:])
-        for idx2 in others: 
-            print "  found at %d as well" % (idx1 + idx2 + 3)
+        for raw_idx in others: 
+            idx2 = raw_idx + idx1 + 3
+            inner_string = string[idx1+1:idx2]
+            #print "  found at %d as well" % (idx2)
+            #print "  search substring %s" % (inner_string)
+
+            for idx3 in range(len(inner_string)):
+                tchar = inner_string[idx3]
+                tothers = findall(tchar, inner_string[idx3+1:])
+                for x in tothers:
+                    pcount += 1
+
+    return pcount
         
 if __name__ == "__main__":
     string = raw_input().strip()
-    print string
-    main(string)
+    answer = main(string)
+    print (answer % (10**9 + 7) )
