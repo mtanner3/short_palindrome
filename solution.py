@@ -2,6 +2,8 @@
 
 
 def findall(target_char, string):
+    # given a target character and a string
+    # return a list of all offsets (zero based) where the target character is found within the string
     positions = []
     curpos = 0
     for char in list(string):
